@@ -34,7 +34,7 @@ before-all = [
 
 # write a setup.cfg to use mingw as compiler
 before-build = [
-	'pip install delvewheel', 
+	'pip install delvewheel setuptools', 
     '''python -c "import os, distutils; cfg = os.path.join(os.path.dirname(distutils.__file__), 'distutils.cfg'); f = open(cfg, 'w'); f.write('[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32'); f.close()"''',
 ]
 
