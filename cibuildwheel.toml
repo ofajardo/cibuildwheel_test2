@@ -40,11 +40,11 @@ before-build = [
 ]
 
 # add dlls from mingw to the wheel to be standalone
-repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel} --add-path C:\\msys64\\mingw64\\bin"
+repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel} --add-path $MSYS2_LOCATION\\mingw64\\bin"
 
 [tool.cibuildwheel.windows.environment]
 # add mingw to the path
-PATH="$PATH;C:\\msys64\\mingw64\\bin"
+PATH="$PATH;$MSYS2_LOCATION\\mingw64\\bin"
 #PATH="$PATH;C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin"
 CC="gcc"
 CXX="g++"
