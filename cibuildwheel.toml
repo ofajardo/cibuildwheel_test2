@@ -31,17 +31,21 @@ PKG_CONFIG_PATH="$(brew --prefix xz)/lib/pkgconfig"
 before-all = [
   "choco install mingw --force -y",
 ]
+
 # write a setup.cfg to use mingw as compiler
 before-build = [
-	'echo "[build]" > setup.cfg', 
-        'echo "compiler = mingw32" >> setup.cfg',
-        'echo "[build_ext]" >> setup.cfg', 
-        'echo "compiler = mingw32" >> setup.cfg',
+	'pip install delvewheel', 
+        '''python -c "import os, distutils; cfg_path = os.path.join(os.path.dirname(distutils.__file__), 'distutils.cfg'); with open(cfg_path, 'w') as f: f.write('[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32')"'''
 ]
+
+# add dlls from mingw to the wheel to be standalone
+repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel} --add-path C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin"
 
 [tool.cibuildwheel.windows.environment]
 # add mingw to the path
 PATH="$PATH:C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin"
+
+
 
 #[tool.cibuildwheel.config-settings.windows]
 # set mingw32 and compiler
