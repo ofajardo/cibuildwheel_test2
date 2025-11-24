@@ -1,0 +1,18 @@
+name: Windows Specific steps
+description: "Runs specific steps required for windows"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: conda-incubator/setup-miniconda@v3
+      with:
+        auto-activate: true
+        activate-environment: ""
+        python-version: ${{ matrix.python[1] }}
+
+    - name: install packages
+      run: |
+        conda install -c conda-forge libpython gxx
+      shell: cmd
+
+
