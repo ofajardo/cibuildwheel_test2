@@ -14,9 +14,11 @@ before-all = [
 [tool.cibuildwheel.macos]
 before-all = [
   "brew install xz",
-  'export CFLAGS="-I$(brew --prefix xz)/include"',
-  'export LDFLAGS="-L$(brew --prefix xz)/lib"', 
-  'export CPPFLAGS="-I$(brew --prefix xz)/include"',
-  'export PKG_CONFIG_PATH="$(brew --prefix xz)/lib/pkgconfig"',
 ]
+
+[tool.cibuildwheel.macos.environment]
+CFLAGS="-I$(brew --prefix xz)/include"
+LDFLAGS="-L$(brew --prefix xz)/lib" 
+CPPFLAGS="-I$(brew --prefix xz)/include"
+PKG_CONFIG_PATH="$(brew --prefix xz)/lib/pkgconfig"
 
