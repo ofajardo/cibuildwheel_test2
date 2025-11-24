@@ -7,8 +7,8 @@ runs:
     - uses: conda-incubator/setup-miniconda@v3
       with:
         auto-activate: true
-        activate-environment: ""
         python-version: ${{ matrix.python[1] }}
+        activate-environment: true
 
     - name: install packages
       run: |
