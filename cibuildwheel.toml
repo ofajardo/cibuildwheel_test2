@@ -36,7 +36,7 @@ PKG_CONFIG_PATH="$(brew --prefix xz)/lib/pkgconfig"
 # write a setup.cfg to use mingw as compiler
 before-build = [
     'pip install delvewheel setuptools', 
-    '''python -c "import os, shutil, glob; cfg=os.path.expanduser('~\\pydistutils.cfg'); open(cfg,'w').write('[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32'); matches=glob.glob(r'C:\msys_build\**\libiconv-*.dll', recursive=True); src=matches[0] if matches else None; dst=os.path.join(os.path.dirname(src), 'iconv.dll') if src else None; print(f'Copying {src} to {dst}'); shutil.copy2(src, dst) if src else print('!!! ERROR: libiconv NOT FOUND !!!')"''';
+    '''python -c "import os, shutil, glob; cfg=os.path.expanduser('~\\pydistutils.cfg'); open(cfg,'w').write('[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32'); matches=glob.glob(r'C:\msys_build\**\libiconv-*.dll', recursive=True); src=matches[0] if matches else None; dst=os.path.join(os.path.dirname(src), 'iconv.dll') if src else None; print(f'Copying {src} to {dst}'); shutil.copy2(src, dst) if src else print('!!! ERROR: libiconv NOT FOUND !!!')"''',
     #'''python -c "import os; p = os.path.expanduser('~\\pydistutils.cfg'); t = '[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32'; f = open(p, 'w'); f.write(t); f.close()"''',
 ]
 
