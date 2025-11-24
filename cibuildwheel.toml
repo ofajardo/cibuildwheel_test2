@@ -11,3 +11,12 @@ before-all = [
   "yum install bzip2-devel bzip2 xz-devel -y",
 ]
 
+[tool.cibuildwheel.macos]
+before-all = [
+  "brew install xz",
+  'export CFLAGS="-I$(brew --prefix xz)/include"',
+  'export LDFLAGS="-L$(brew --prefix xz)/lib"', 
+  'export CPPFLAGS="-I$(brew --prefix xz)/include"',
+  'export PKG_CONFIG_PATH="$(brew --prefix xz)/lib/pkgconfig"',
+]
+
