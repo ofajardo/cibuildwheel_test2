@@ -36,7 +36,8 @@ PKG_CONFIG_PATH="$(brew --prefix xz)/lib/pkgconfig"
 # write a setup.cfg to use mingw as compiler
 before-build = [
     'pip install delvewheel setuptools', 
-    '''python -c "import os; p = os.path.expanduser('~\\pydistutils.cfg'); t = '[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32'; f = open(p, 'w'); f.write(t); f.close()"''',
+    '''python -c "import os, shutil, glob; cfg=os.path.expanduser('~\\pydistutils.cfg'); open(cfg,'w').write('[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32'); path=r'C:\msys_build\mingw64\bin'; iconv=glob.glob(os.path.join(path, 'libiconv-*.dll')); shutil.copy2(iconv[0], os.path.join(path, 'iconv.dll')) if iconv else print('Warning: libiconv not found')"''',
+    #'''python -c "import os; p = os.path.expanduser('~\\pydistutils.cfg'); t = '[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32'; f = open(p, 'w'); f.write(t); f.close()"''',
 ]
 
 # add dlls from mingw to the wheel to be standalone
