@@ -59,7 +59,7 @@ jobs:
           SRC: ${{ github.workspace }}/pyreadstat
           MSYS2_LOCATION: ${{ steps.msys2.outputs.msys2-location }}"
           CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: >
-            python -c "import sys, os, subprocess; path = os.path.join(os.environ.get('MSYS2_LOCATION'), 'mingw64', 'bin'); args = ['delvewheel', 'repair', '-w', sys.argv[1], sys.argv[2], '--add-path', path]; subprocess.run(args, check=True)" {dest_dir} {wheel}
+            python -c "import sys, os, subprocess; loc = os.environ.get('MSYS2_LOCATION', '').replace('\"', ''); path = os.path.join(loc, 'mingw64', 'bin'); args = ['delvewheel', 'repair', '-w', sys.argv[1], sys.argv[2], '--add-path', path]; subprocess.run(args, check=True)" {dest_dir} {wheel}
         with:
            package-dir: pyreadr
            output-dir: dist
