@@ -28,7 +28,7 @@ PKG_CONFIG_PATH="$(brew --prefix xz)/lib/pkgconfig"
 
 [tool.cibuildwheel.config-settings.windows]
 # set mingw32 and compiler
---compiler = "mingw32"
+--compiler="mingw32"
 #[tool.cibuildwheel.windows]
 #before-build = [
     #"python.exe setup.py config --compiler=mingw32",
