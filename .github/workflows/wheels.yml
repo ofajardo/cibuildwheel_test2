@@ -58,8 +58,6 @@ jobs:
         env:
           CIBW_BUILD: ${{ matrix.python[0] }}-${{ matrix.buildplat[1] }}
           SRC: ${{ github.workspace }}/pyreadstat
-          CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: >
-            python -c "import sys, subprocess; subprocess.run(['delvewheel', 'repair', '-w', sys.argv[1], sys.argv[2], '--add-path', r'C:\msys_build\mingw64\bin'], check=True)" {dest_dir} {wheel}
         with:
            package-dir: pyreadr
            output-dir: dist
