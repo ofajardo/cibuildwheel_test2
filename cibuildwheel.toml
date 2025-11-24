@@ -31,7 +31,6 @@ PKG_CONFIG_PATH="$(brew --prefix xz)/lib/pkgconfig"
 before-all = [
   #"choco install mingw --force -y",
   'choco install mingw --force -y --no-progress --params "/InstallDir:C:\MinGW"',
-  'choco install xz --force -y --no-progress',
 ]
 
 # write a setup.cfg to use mingw as compiler
