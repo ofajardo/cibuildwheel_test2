@@ -42,12 +42,6 @@ jobs:
           submodules: true
           persist-credentials: false
 
-      #- name: Prepare Windows environment
-        #if: startsWith(matrix.buildplat[0], 'windows')
-        ##if: ${{ matrix.buildplat[1] == 'win_arm64' }}
-        #uses: ./.github/actions/windows_actions
-
-
       - if: runner.os == 'Windows'
         uses: msys2/setup-msys2@v2
         id: msys2
@@ -58,16 +52,12 @@ jobs:
             mingw-w64-x86_64-toolchain
             mingw-w64-x86_64-xz
 
-      - name: Set MSYS2 Env Variable
-        if: runner.os == 'Windows'
-        shell: bash
-        run: echo "MSYS2_LOCATION=${{ steps.msys2.outputs.msys2-location }}" >> $GITHUB_ENV
-
       - name: Build wheels
         uses: pypa/cibuildwheel@9c00cb4f6b517705a3794b22395aedc36257242c  # v3.2.1
         env:
           CIBW_BUILD: ${{ matrix.python[0] }}-${{ matrix.buildplat[1] }}
           SRC: ${{ github.workspace }}/pyreadstat
+          MSYS2_LOCATION: ${{ steps.msys2.outputs.msys2-location }}"
         with:
            package-dir: pyreadr
            output-dir: dist
