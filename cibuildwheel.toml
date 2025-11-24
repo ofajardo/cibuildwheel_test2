@@ -43,7 +43,7 @@ repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel} --add-path C:\\P
 
 [tool.cibuildwheel.windows.environment]
 # add mingw to the path
-PATH="$PATH:C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin"
+PATH="$PATH;C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin"
 CC="gcc"
 CXX="g++"
 
