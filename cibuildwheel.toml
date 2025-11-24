@@ -34,8 +34,11 @@ before-all = [
 
 # write a setup.cfg to use mingw as compiler
 before-build = [
-	'pip install delvewheel setuptools', 
-    '''python -c "import os, distutils; cfg = os.path.join(os.path.dirname(distutils.__file__), 'distutils.cfg'); f = open(cfg, 'w'); f.write('[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32'); f.close()"''',
+    'pip install delvewheel setuptools', 
+    'echo "[build]" > %USERPROFILE%\pydistutils.cfg',
+    'echo "compiler = mingw32" >> %USERPROFILE%\pydistutils.cfg',
+    'echo "[build_ext]" >> %USERPROFILE%\pydistutils.cfg',
+    'echo "compiler = mingw32" >> %USERPROFILE%\pydistutils.cfg',
 ]
 
 # add dlls from mingw to the wheel to be standalone
@@ -44,6 +47,9 @@ repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel} --add-path C:\\P
 [tool.cibuildwheel.windows.environment]
 # add mingw to the path
 PATH="$PATH:C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin"
+CC=gcc
+CXX=g++
+
 
 
 
