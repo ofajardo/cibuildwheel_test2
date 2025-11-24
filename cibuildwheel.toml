@@ -36,7 +36,7 @@ before-all = [
 before-build = [
     'pip install delvewheel setuptools', 
     '''python -c "import os; p = os.path.expanduser('~\\pydistutils.cfg'); t = '[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32'; f = open(p, 'w'); f.write(t); f.close()"''',
-    'copy C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin\libiconv-2.dll C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin\iconv.dll',
+    #'copy C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin\libiconv-2.dll C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin\iconv.dll',
     'dir C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin',
 ]
 
