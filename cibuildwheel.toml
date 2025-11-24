@@ -26,36 +26,3 @@ LDFLAGS="-L$(brew --prefix xz)/lib"
 CPPFLAGS="-I$(brew --prefix xz)/include"
 PKG_CONFIG_PATH="$(brew --prefix xz)/lib/pkgconfig"
 
-[tool.cibuildwheel.windows]
-# Install mingw
-before-all = [
-  #"choco install mingw --force -y",
-  'choco install mingw --force -y --no-progress --params "/InstallDir:C:\MinGW"',
-]
-
-# write a setup.cfg to use mingw as compiler
-before-build = [
-    'pip install delvewheel setuptools', 
-    '''python -c "import os; p = os.path.expanduser('~\\pydistutils.cfg'); t = '[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32'; f = open(p, 'w'); f.write(t); f.close()"''',
-    'powershell -Command "Copy-Item -Path C:\MinGW\bin\libiconv-*.dll -Destination C:\MinGW\bin\iconv.dll -ErrorAction SilentlyContinue"',
-]
-
-# add dlls from mingw to the wheel to be standalone
-repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel} --add-path C:\\MinGW\\bin"
-#repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel} --add-path C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin"
-
-[tool.cibuildwheel.windows.environment]
-# add mingw to the path
-PATH="$PATH;C:\\MinGW\\bin"
-#PATH="$PATH;C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin"
-CC="gcc"
-CXX="g++"
-
-
-#[tool.cibuildwheel.config-settings.windows]
-# set mingw32 and compiler
-#--compiler="mingw32"
-#[tool.cibuildwheel.windows]
-#before-build = [
-    #"python.exe setup.py config --compiler=mingw32",
-#]
