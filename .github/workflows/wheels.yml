@@ -54,11 +54,9 @@ jobs:
           location: C:\
           msystem: MINGW64
           path-type: inherit
-          #install: >-
-            #mingw-w64-x86_64-gcc-fortran
-        - env:
-              MSYS2_LOCATION: ${{ steps.msys2.outputs.msys2-location }}
-            run: echo "$env:MSYS2_LOCATION"
+          install: >-
+            mingw-w64-x86_64-toolchain
+            mingw-w64-x86_64-xz
 
       - name: Build wheels
         uses: pypa/cibuildwheel@9c00cb4f6b517705a3794b22395aedc36257242c  # v3.2.1
