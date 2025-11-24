@@ -49,7 +49,7 @@ repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel} --add-path C:\\P
 PATH="$PATH:C:\\ProgramData\\chocolatey\\lib\\mingw\\tools\\install\\mingw64\\bin"
 CC="gcc"
 CXX="g++"
-SETUPTOOLS_USE_DISTUTILS=stdlib
+SETUPTOOLS_USE_DISTUTILS="stdlib"
 
 
 
