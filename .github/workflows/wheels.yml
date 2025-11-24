@@ -47,15 +47,6 @@ jobs:
         ##if: ${{ matrix.buildplat[1] == 'win_arm64' }}
         #uses: ./.github/actions/windows_actions
 
-      #- name: Build wheels
-        #uses: pypa/cibuildwheel@9c00cb4f6b517705a3794b22395aedc36257242c  # v3.2.1
-        #env:
-          #CIBW_BUILD: ${{ matrix.python[0] }}-${{ matrix.buildplat[1] }}
-          #SRC: ${{ github.workspace }}/pyreadstat
-        #with:
-           #package-dir: pyreadr
-           #output-dir: dist
-           #config-file: cibuildwheel.toml
 
       - if: runner.os == 'Windows'
         uses: msys2/setup-msys2@v2
@@ -66,8 +57,14 @@ jobs:
             mingw-w64-x86_64-gcc-fortran
 
       - name: Build wheels
-        run: |
-          pipx run cibuildwheel
+        uses: pypa/cibuildwheel@9c00cb4f6b517705a3794b22395aedc36257242c  # v3.2.1
+        env:
+          CIBW_BUILD: ${{ matrix.python[0] }}-${{ matrix.buildplat[1] }}
+          SRC: ${{ github.workspace }}/pyreadstat
+        with:
+           package-dir: pyreadr
+           output-dir: dist
+           config-file: cibuildwheel.toml
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
