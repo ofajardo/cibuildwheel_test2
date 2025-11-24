@@ -42,10 +42,10 @@ jobs:
           submodules: true
           persist-credentials: false
 
-      - name: Prepare Windows environment
-        if: startsWith(matrix.buildplat[0], 'windows')
-        #if: ${{ matrix.buildplat[1] == 'win_arm64' }}
-        uses: ./.github/actions/windows_actions
+      #- name: Prepare Windows environment
+        #if: startsWith(matrix.buildplat[0], 'windows')
+        ##if: ${{ matrix.buildplat[1] == 'win_arm64' }}
+        #uses: ./.github/actions/windows_actions
 
       - name: Build wheels
         uses: pypa/cibuildwheel@9c00cb4f6b517705a3794b22395aedc36257242c  # v3.2.1

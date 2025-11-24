@@ -35,7 +35,8 @@ before-all = [
 # write a setup.cfg to use mingw as compiler
 before-build = [
 	'pip install delvewheel', 
-        '''python -c "import os, distutils; cfg_path = os.path.join(os.path.dirname(distutils.__file__), 'distutils.cfg'); with open(cfg_path, 'w') as f: f.write('[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32')"'''
+        '''echo "import os, distutils; cfg_path = os.path.join(os.path.dirname(distutils.__file__), 'distutils.cfg'); with open(cfg_path, 'w') as f: f.write('[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32')" > con.py''',
+        'python con.py',
 ]
 
 # add dlls from mingw to the wheel to be standalone
