@@ -34,11 +34,10 @@ PKG_CONFIG_PATH="$(brew --prefix xz)/lib/pkgconfig"
 #]
 
 before-build = [
-# write a setup.cfg to use mingw as compiler
+    # write a setup.cfg to use mingw as compiler
     'pip install delvewheel setuptools', 
-    #'''python -c "import os; p = os.path.expanduser('~\\pydistutils.cfg'); t = '[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32'; f = open(p, 'w'); f.write(t); f.close()"''',
-    '''python -c "import os; p = os.path.expanduser('~\\pydistutils.cfg'); t = '[build]\ncompiler=mingw32\n[build_ext]\ncompiler=mingw32\ndefine=MS_WIN64,SIZEOF_VOID_P=8'; f = open(p, 'w'); f.write(t); f.close()"''',
-# copy dlls as an alias for repairing wheels
+    'python scripts/configure_mingw.py',
+    # copy dlls as an alias for repairing wheels
     'powershell -Command "Copy-Item -Path C:\msys_build\msys64\mingw64\bin\libiconv-*.dll -Destination C:\msys_build\msys64\mingw64\bin\iconv.dll -Force"',
     'powershell -Command "Copy-Item -Path C:\msys_build\msys64\mingw64\bin\libbz2-*.dll -Destination C:\msys_build\msys64\mingw64\bin\libbz2.dll -Force"',
     'powershell -Command "Copy-Item -Path C:\msys_build\msys64\mingw64\bin\zlib1.dll -Destination C:\msys_build\msys64\mingw64\bin\zlib.dll -Force"',
