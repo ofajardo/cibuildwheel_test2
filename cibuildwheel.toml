@@ -48,9 +48,6 @@ repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel} --add-path C:\\m
 [tool.cibuildwheel.windows.environment]
 # add mingw to the path
 PATH="$PATH;C:\\msys_build\\msys64\\mingw64\\bin"
-LIBRARY_PATH="C:\\msys_build\\msys64\\mingw64\\lib"
-C_INCLUDE_PATH="C:\\msys_build\\msys64\\mingw64\\include"
-PKG_CONFIG_PATH="C:\\msys_build\\msys64\\mingw64\\lib\\pkgconfig"
 CC="gcc"
 CXX="g++"
 

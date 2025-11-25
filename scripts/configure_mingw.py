@@ -3,7 +3,10 @@ import shutil
 import glob
 
 # 1. Define the MinGW Path (Hardcoded based on your workflow setup)
-MINGW_BIN = r"C:\msys_build\msys64\mingw64\bin"
+MSYS_ROOT = r"C:\msys_build\msys64\mingw64"
+MINGW_BIN = os.path.join(MSYS_ROOT, "bin")
+MINGW_LIB = os.path.join(MSYS_ROOT, "lib")
+MINGW_INC = os.path.join(MSYS_ROOT, "include")
 
 def configure_distutils():
     """
@@ -15,12 +18,14 @@ def configure_distutils():
     
     # define=MS_WIN64,SIZEOF_VOID_P=8 is crucial for Python 3.10/3.11 compatibility
     # on GCC to avoid "division by zero" errors in Cython.
-    config_content = """[build]
+    config_content = f"""[build]
 compiler=mingw32
 
 [build_ext]
 compiler=mingw32
 define=MS_WIN64,SIZEOF_VOID_P=8
+include_dirs={MINGW_INC}
+library_dirs={MINGW_LIB}
 """
     
     print(f"Writing global config to: {config_path}")
