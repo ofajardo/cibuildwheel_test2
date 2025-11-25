@@ -50,4 +50,6 @@ repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel} --add-path C:\\m
 PATH="$PATH;C:\\msys_build\\msys64\\mingw64\\bin"
 CC="gcc"
 CXX="g++"
+# for python 3.11 and below size_of_void_p is undefined
+CFLAGS="-DSIZEOF_VOID_P=8 -DMS_WIN64"
 
