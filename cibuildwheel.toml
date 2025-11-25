@@ -50,4 +50,6 @@ repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel} --add-path C:\\m
 PATH="$PATH;C:\\msys_build\\msys64\\mingw64\\bin"
 CC="gcc"
 CXX="g++"
+LDSHARED="gcc -shared"
+LDFLAGS="-shared"
 
